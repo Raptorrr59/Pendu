@@ -1,4 +1,4 @@
-const WORD_LIST = require('an-array-of-french-words');
+const WORD_LIST = require('an-array-of-english-words');
 
 for (let i = 0; i < WORD_LIST.length; i++) {
   if (WORD_LIST[i].length >= 10) {
