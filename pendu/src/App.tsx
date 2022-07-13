@@ -1,34 +1,53 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
+import { setSyntheticLeadingComments } from 'typescript';
 import './App.css';
 import './Keyboard.css';
 import WORD_LIST from './Word';
 //import Keyboard from './Keyboard';
-import { generateKey } from 'crypto';
-import { resolveObjectURL } from 'buffer';
-import { resolveModuleName } from 'typescript';
 
 function App() {
   const [count, setCount] = useState(10);
-  const [word, setWord] = useState(WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]);
-  const [status, setStatus] = useState(word.split('').map(() => '_'));
-  //let keyboard;
+  const [word] = useState(WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]);
+  const [guess, setGuess] = useState(word.split('').map(() => '_'));
+  const [letters, setLetters] = useState<Array<String>>([]);
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    const key = event.key;
+    if (key >= 'a' && key <= 'z') {
+      console.log(key);
+      checkForLetter(key.toUpperCase());
+    }
+  }
 
   useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === 'Enter' && count > 0) {
-        setCount(count - 1);
-      }
-    }
     window.addEventListener('keyup', handleKeyPress);
     return () => {
       window.removeEventListener('keyup', handleKeyPress);
     }
-  }, [count]);
+  });
 
-  //keyboard = generateKeyboard();
+  const checkForLetter = (letter: string) => {
+    let check = false;
+    let temp = guess.slice();
+    for (let i = 0; i < letters.length; i++) {
+      if (letters[i] === letter.toUpperCase()) {
+        return;
+      }
+    }
+    setLetters([...letters, letter.toUpperCase()]);
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] === letter.toLowerCase()) {
+        temp[i] = letter;
+        check = true;
+        setGuess(temp);
+      }
+    }
+    if (!check && count > 0) {
+      setCount(count - 1);
+    }
+  }
 
-  if (status.join('') === word.toUpperCase()) {
+  if (guess.join('') === word.toUpperCase() || guess.join('') === word.toLowerCase()) {
     return (
       <div className="End">
         <header className="App-header">
@@ -53,25 +72,11 @@ function App() {
     );
   }
 
-  const checkForLetter = (letter: string) => {
-    let check = false;
-    for (let i = 0; i < word.length; i++) {
-      if (word[i] === letter.toLowerCase()) {
-        status[i] = letter;
-        check = true;
-      }
-    }
-    if (!check) {
-      setCount(count - 1);
-    }
-    setStatus(status);
-  }
-
   return (
     <div className="App">
       <header className="App-header">
         <p>
-          {status.join(' ')}
+          {guess.join(' ')}
           <br />
           Vous avez le droit à: {count} erreurs
         </p>
@@ -107,9 +112,11 @@ function App() {
         <button className='Keyboard' onClick={() => { checkForLetter('B') }}> B </button>
         <button className='Keyboard' onClick={() => { checkForLetter('N') }}> N </button>
       </div>
+      <p>
+        {letters.join(', ')}
+      </p>
       </header>
       </div>
-    
   );
 }
 

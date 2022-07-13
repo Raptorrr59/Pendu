@@ -1,36 +1,17 @@
 button {
     padding: 1vw 1.5vw;
-  }
-  
-  .keyboard > .letter {
-    margin-top: 3%;
-    margin-left: 7px;
-    margin-right: 7px;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5em;
-    border: solid gray;
+    background-color: rgb(238, 82, 134);
     color: white;
+    animation: App-logo-spin infinite 10s cubic-bezier(.68,-0.55,.27,1.55);
   }
-  
-  .keyboard>.letter:hover {
-    font-weight: bold;
-  }
-  
-  @media all and (max-device-width: 480px) {
-  
-    .keyboard {
-      margin: 0 auto;
-      margin-top: 50px;
+
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
     }
-    .keyboard > .letter {
-      padding: 1px;
-      font-size: 0.9em;
-      width: 30px;
-      height: 30px;
-    }
-  
-    .keyboard > .letter > span {
-      margin: 0 auto;
+    to {
+      transform: rotate(360deg);
     }
   }
+  
