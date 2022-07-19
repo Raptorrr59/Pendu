@@ -12,51 +12,44 @@
     @include activated-background-color(true);
     color: rgb(0, 0, 0);
     cursor: pointer;
-    /*animation: App-button-spin infinite 10s cubic-bezier(.68,-0.55,.27,1.55);*/
+    //animation: App-button-spin infinite 10s cubic-bezier(.68,-0.55,.27,1.55);
+    &:hover {
+      transform: translateY(-3px);
+      scale: none;
+    }
+    &:disabled {
+      padding: 1vw 1.5vw;
+      @include activated-background-color(false);
+      color: rgb(255, 255, 255);
+      cursor: not-allowed;
+      &:hover {
+        transform: none;
+        scale: none;
+      }
+    }
   }
 
-.Keyboard:hover {
-    transform: translateY(-3px);
-    scale: none;
-  }
-
-.Keyboard:disabled {
-    padding: 1vw 1.5vw;
-    @include activated-background-color(false);
-    color: rgb(255, 255, 255);
-    cursor: not-allowed;
-  }
-
-  .Keyboard:disabled:hover {
-    scale: none;
-  }
 
   @keyframes App-logo-spin {
     0% {
       transform: rotate(0deg);
       background-color: rgb(238, 82, 134);
-      scale: 1;
     }
     20% {
       background-color: rgb(255, 0, 0);
-      scale: 1.5;
     }
     40% {
       background-color: rgb(255, 255, 0);
-      scale: 2;
     }
     60% {
       background-color: rgb(0, 255, 255);
-      scale: 2.5;
     }
     80% {
       background-color: rgb(255, 0, 255);
-      scale: 2;
     }
     100% {
       transform: rotate(360deg);
       background-color: rgb(238, 82, 134);
-      scale: 1.5;
     }
   }
 

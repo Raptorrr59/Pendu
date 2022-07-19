@@ -1,23 +1,32 @@
-/*import count from './App'
-import word from './App'
+import {Fragment} from 'react';
+import './App.scss';
+import './Keyboard.scss';
+import {Button} from './Buttons';
 
-function Win() {
-    return(
-        <div>
-          <header className="App-header">
-            <p> Jeu du Pendu</p>
-          </header>
-          <body className="End">
-            <p>Félicitations, vous avez gagné !</p>
-            <p>Il vous restait encore {count} échecs possibles</p>
-            <p>Le mot à trouver était: {word}</p>
-            <button className="Keyboard" onClick={() => { window.location.reload() }}>Rejouer</button>
-          </body>
-          <footer className='App-footer'>
-            <p>Créé par Damien Birembaut</p>
-          </footer>
-        </div>
+function Lost(prop: any) {
+  document.title = 'Perdu!';
+
+  return (
+    <Fragment>
+        <p>Perdu !</p>
+        <p>Vous avez joué {prop.turn} tours.</p>
+        <p>Le mot à trouver était: {prop.word}</p>
+        <Button />
+    </Fragment>
   );
 }
-*/
-export {}
+
+function Won(prop: any) {
+  document.title = 'Gagné!';
+
+  return (
+    <Fragment>
+        <p>Félicitations, vous avez gagné !</p>
+        <p>Il vous restait encore {prop.count} erreurs possibles et vous avez pris {prop.turn} tours pour trouver le mot</p>
+        <p>Le mot à trouver était: {prop.word}</p>
+        <Button />
+    </Fragment>
+  );
+}
+
+export {Lost, Won};
