@@ -1,8 +1,2 @@
-const WORD_LIST = require('an-array-of-english-words');
-const List: Array<String> = [];
-
-for (let i = 0; i < 1000; i++) {
-  List.push(WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]);
-}
-
-export default List;
+export default ["Superman", "Batman", "Wonder Woman", "Spider-Man", "Iron Man", "Captain America", "Thor", "The Flash", "Green Lantern", "Black Widow", "Ant-Man", "The Hulk", "Aquaman", "Cyborg", "Captain Marvel", "Hawkeye", "Wolverine", "Cyclops", "Jean Grey", "Daredevil", "Punisher", "Blade", "Hellboy", "The Crow", "Spawn", "Judge Dredd", "Mr. Fantastic", "Invisible Woman", "Thing", "Mr. Incredible", "Elastigirl", "Violet", "Batman Beyond", "Dirk J Vlug"]
+;
